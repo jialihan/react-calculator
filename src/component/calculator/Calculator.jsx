@@ -3,6 +3,7 @@ import Button from 'component/button/Button';
 import './Calculator.css';
 
 export function Calculator(props) {
+  const [isFirstSign, setIsFirstSign] = useState(true);
   const [isEnterPressed, setIsEnterPressed] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [sum, setSum] = useState(0);
@@ -105,12 +106,18 @@ export function Calculator(props) {
     if (!isNewNum) {
       compute('+');
     }
+    if (isFirstSign) {
+      setIsFirstSign(false);
+    }
     setSign('+');
     setIsNewNum(true);
   };
   const subtract = () => {
     if (!isNewNum) {
       compute('-');
+    }
+    if (isFirstSign) {
+      setIsFirstSign(false);
     }
     setSign('-');
     setIsNewNum(true);
@@ -144,7 +151,6 @@ export function Calculator(props) {
     setPreOperator('');
     setIsNewNum(true);
     setIsEnterPressed(true);
-    setSign('');
   };
   const compute = (op) => {
     let curNum = parseFloat(textInput);
@@ -166,7 +172,7 @@ export function Calculator(props) {
       // }
     }
     if (op === '+' || op === '-' || op === '=') {
-      if (op === '=' && !sign) {
+      if (op === '=' && isFirstSign) {
         // fix: only one number & NO operator, then do nothing
         return;
       }
