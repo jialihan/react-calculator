@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# React Simple Calculator App
+# [React Simple Calculator App](https://jialihan.github.io/blog/#/react/react_calc)
 
 #### I. [UI Design](#chapter1)
 
