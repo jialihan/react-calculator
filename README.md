@@ -23,7 +23,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 #### IV. [Bugs & To Be Fixed](#chapter4)
 
 - [4.1 the toggle `"+/-"` button - fixed](#ch4-1)
-- [4.2 None operator should NOT change result - not fixed](#ch4-2)
+- [4.2 None operator should NOT change result - fixed](#ch4-2)
 
 #### V. [Demo: finished features](#chapter5)
 
@@ -386,16 +386,37 @@ there are many edge cases that I cannot fully undertand its inner roles, for exm
 
 <div id="ch4-2" />
 
-#### 4.2 None operator should NOT change result
+#### 4.2 None operator should NOT change result - fixed
 
 Use case:
 when NONE of the operators are pressed, only one number and the `"="(equal)` button, result should never change!
 
 Bug example:
 
-![image](../assets/always-add-bug.gif ":size=240")
+![image](../assets/always-add-bug.gif)
 
-To Be Fixed!
+~~To Be Fixed!~~
+
+**Fixed:**
+
+- Use extra boolean variable to mark the first operator status:
+  ```js
+  const [isFirstSign, setIsFirstSign] = useState(true);
+  ```
+- When press `"Enter(=)"` key, only when it's the first time, and NO sign op pressed before, we do nothing !
+  ```js
+  if (op === "=" && isFirstSign) {
+    // fix: only one number & NO operator, then do nothing
+    return;
+  }
+  ```
+- Recover its value whenever we press `"+"` or `"-"` in the future, in `addition()` and `subtract()` method
+  ```js
+  // in addition() method & subtract() method
+  if (isFirstSign) {
+    setIsFirstSign(false);
+  }
+  ```
 
 <div id="chapter5" />
 
