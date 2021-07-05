@@ -6,7 +6,7 @@ export function Calculator(props) {
   const [isEnterPressed, setIsEnterPressed] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [sum, setSum] = useState(0);
-  const [sign, setSign] = useState('+');
+  const [sign, setSign] = useState('');
   const [isNewNum, setIsNewNum] = useState(true);
   const [preOperator, setPreOperator] = useState('');
   const [prevInput, setPrevInput] = useState('');
@@ -144,6 +144,7 @@ export function Calculator(props) {
     setPreOperator('');
     setIsNewNum(true);
     setIsEnterPressed(true);
+    setSign('');
   };
   const compute = (op) => {
     let curNum = parseFloat(textInput);
@@ -165,6 +166,10 @@ export function Calculator(props) {
       // }
     }
     if (op === '+' || op === '-' || op === '=') {
+      if (op === '=' && !sign) {
+        // fix: only one number & NO operator, then do nothing
+        return;
+      }
       let newSum = 0;
       if (prevInput) {
         // 2 + 4 * 2 + ...
@@ -176,9 +181,7 @@ export function Calculator(props) {
       } else {
         // 2 + 3 - ...
         let tmp = 0;
-        if (sign) {
-          tmp = sign === '-' ? -curNum : curNum;
-        }
+        tmp = sign === '-' ? -curNum : curNum;
         newSum = sum + tmp;
       }
       setSum(newSum);
