@@ -1,0 +1,25 @@
+.grid-container{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(100px, auto) repeat(5,100px);
+}
+
+.results{
+    grid-column: 1/-1;
+    padding: 10px;
+    font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.results p{
+    margin: 0;
+    text-align: right;
+    vertical-align: bottom;
+    /* text-overflow: ellipsis; */
+    text-overflow: clip;
+    overflow: hidden;
+}

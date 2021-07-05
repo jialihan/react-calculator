@@ -1,0 +1,23 @@
+button {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 2.6rem;
+  background-color: rgb(17, 16, 16);
+  cursor: pointer;
+  margin: 2px;
+}
+.op {
+  background-color: orange;
+}
+.tool {
+  background-color: gray;
+}
+
+button:hover{
+  background-color: rgb(17, 16, 16, 0.2);
+}
+.zero {
+  grid-column: span 2;
+}
